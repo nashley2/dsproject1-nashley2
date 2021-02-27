@@ -29,10 +29,10 @@ public:
 	void display();
 
 	/* Insert an item into the list in order */
-	void insert(ElementType e, int position);
+	void insert(ElementType e, int preptr_value);
 
 	/* Remove the item from the list at a particular position */
-	void erase(int position);
+	void erase(int preptr_value);
 
 private:
 	Node* first; // pointer to the first node in the list

@@ -9,7 +9,7 @@ using namespace std;
 /* Constructor  */
 ListLinked::ListLinked()
 {
-		first = NULL;
+	first = NULL;
 }
 
 /* destructor - clean up memory for remaining nodes in list */
@@ -49,44 +49,46 @@ void ListLinked::display()
 }
 
 /* insert element in position */
-void ListLinked::insert(ElementType e, int position = 0)
+void ListLinked::insert(ElementType e, int preptr_value)
 {
+	
+	
+
+	
+	
 	Node* newptr = new Node(e);
 	if (first == NULL) //insert the very first element
 	{
-		if (position == 0)
-		{
-			newptr->next = NULL;
-			first = newptr;
-		}
-		else
-		{
-			cout << "Location Error!!";
-		}
+		newptr->next = NULL;
+		first = newptr;
 	}
 	else
 	{
-		if (position == 0) //insert on the first position when some elements existed
-		{
-			newptr->next = first;
-			first = newptr;
-		}
-		else //most cases belongs to this situation (as showed in the class slide)
-		{
+		
 			Node* preptr;
 			preptr = first;
-			for (int i = 0; i < position - 1; i++)
+			//nav here to node before the node we want to insert
+					
+			//for (int i = 0; i < preptr_value - 1; i++)
+			//new code goes here
+			while (preptr!= NULL && preptr->data != preptr_value)
 				preptr = preptr->next;
-			newptr->next = preptr->next;
-			preptr->next = newptr;
+			//insertion code
+			if (preptr != NULL)
+			{
+				newptr->next = preptr->next;
+				preptr->next = newptr;
+			}
+			else
+				cout << "Error, No "<< preptr_value << " exists."<<endl;
 		}
-	}
+	
 }
 
 /* Remove specified element from the list at a specific position */
-void ListLinked::erase(int position)
+void ListLinked::erase(int preptr_value)
 {
-	if (position == 0) //delete the first element
+	if (preptr_value == 0) //delete the first element
 	{
 		Node* ptr = first;
 		first = ptr->next;
@@ -96,8 +98,13 @@ void ListLinked::erase(int position)
 	{
 		Node* preptr;
 		preptr = first;
-		for (int i = 0; i < position - 1; i++)
+		
+		//Navigate same way as insert 
+		while (preptr != NULL && preptr->data != preptr_value)
+		{
 			preptr = preptr->next;
+		}
+		//deletion logic this does not change
 		Node* ptr = preptr->next;
 		preptr->next = ptr->next;
 		delete(ptr);
